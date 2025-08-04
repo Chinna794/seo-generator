@@ -22,6 +22,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@tailwindcss/postcss": "^4.1.11",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.23.12",
     "motion": "^12.23.12",
     "nanoid": "^5.1.5",
