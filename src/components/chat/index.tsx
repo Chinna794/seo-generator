@@ -1,7 +1,7 @@
 'use client';
 import { Button, Card, CardBody, Kbd, Tooltip } from '@heroui/react';
 import { HighlightSpan } from 'components/common/highlight-span';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import React from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 import { IoIosAttach } from 'react-icons/io';
@@ -13,11 +13,14 @@ import { MessageType } from 'type/chat';
 import { messageLimit } from 'constants/message';
 import { useRotatingPrompt } from 'hooks/use-rotating-placeholders';
 import { ChatTextarea } from './chat-textarea';
+import { PromptInputWithActions } from 'components/prompt-input/with-actions';
+import { useMatchRoute } from 'hooks/use-match-route';
+import { AppRoutes } from 'constants/routes';
 
 export function Chat() {
   const [messageValue, setMessageValue] = React.useState('');
   const { addNewChat, addMessage } = useChatTabsStore();
-  const pathname = usePathname();
+  const { isSameRoute } = useMatchRoute(AppRoutes.Chat);
   const router = useRouter();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const params = useParams<{ id: string }>();
@@ -32,14 +35,13 @@ export function Chat() {
 
   const handleSubmitMessage = (event: React.FormEvent) => {
     event.preventDefault();
-    const isRootRoute = '/' === pathname;
     const newMessage: MessageType = {
       author: 'me',
       content: messageValue,
       createdAt: new Date().toISOString(),
       id: nanoid(),
     };
-    if (isRootRoute) {
+    if (isSameRoute) {
       const chatId = nanoid();
       addNewChat({
         id: chatId,
@@ -63,6 +65,11 @@ export function Chat() {
       formRef.current?.requestSubmit?.();
     }
   };
+
+  // eslint-disable-next-line no-constant-condition
+  if (true) {
+    return <PromptInputWithActions />;
+  }
 
   return (
     <Card className="sticky bottom-[10px] m-0 flex-none shadow-2xl">

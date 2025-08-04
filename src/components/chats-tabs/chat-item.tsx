@@ -5,6 +5,7 @@ import { cn } from 'lib/utils';
 import { Button } from '@heroui/react';
 import { HiOutlineChatAlt } from 'react-icons/hi';
 import Link from 'next/link';
+import { AppRoutes } from 'constants/routes';
 
 export function ChatItem({ chat }: { chat: Chat }) {
   const pathname = usePathname();
@@ -15,11 +16,10 @@ export function ChatItem({ chat }: { chat: Chat }) {
   return (
     <Button
       as={Link}
-      href={`/chat/${chat.id}`}
+      href={`${AppRoutes.Chat}/${chat.id}`}
       key={chat.id}
       className={cn('py-1')}
       color={isActiveChat ? 'primary' : 'default'}
-      fullWidth
       startContent={<HiOutlineChatAlt />}
     >
       {chat.name}

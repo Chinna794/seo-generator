@@ -1,7 +1,5 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { AppLayout } from 'components/common/app-layout';
-import { ChatContainer } from 'components/common/chat-container';
 
 export const metadata: Metadata = {
   title: 'Seo Generator - Generate, Edit and Preview your SEO',
@@ -10,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Main() {
-  return (
-    <AppLayout>
-      <ChatContainer />
-    </AppLayout>
-  );
+  return <div>Hello from SEO Generator</div>;
 }
