@@ -1,7 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { AppLayout } from 'components/common/app-layout';
-import { Header } from 'components/header';
 import { ChatContainer } from 'components/common/chat-container';
 
 export const metadata: Metadata = {
@@ -12,8 +11,7 @@ export const metadata: Metadata = {
 
 export default function Main() {
   return (
-    <AppLayout className="container h-screen gap-4 overflow-y-hidden">
-      <Header />
+    <AppLayout className="gap-4">
       <ChatContainer />
     </AppLayout>
   );

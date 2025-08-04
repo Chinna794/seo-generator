@@ -4,9 +4,12 @@ import { Button, Divider, Kbd } from '@heroui/react';
 import { useChatTabsStore } from 'store/chat-tabs-store';
 import { FiEdit } from 'react-icons/fi';
 import { HighlightSpan } from 'components/common/highlight-span';
+import { ChatItem } from './chat-item';
+import { useRouter } from 'next/navigation';
 
 export const ChatTabs = () => {
   const { chats } = useChatTabsStore();
+  const router = useRouter();
 
   const handleStartNewChat = () => {};
 
@@ -18,24 +21,20 @@ export const ChatTabs = () => {
       <Divider />
       <Button
         onPress={handleStartNewChat}
-        className="btn btn-primary group my-2"
+        fullWidth
+        className="group my-2 transition"
         startContent={<FiEdit />}
-        endContent={
-          <Kbd className="opacity-0 transition-all group-hover:opacity-100" keys={['command', 'shift']}>
-            O
-          </Kbd>
-        }
+        endContent={<Kbd keys={['command', 'shift']}>O</Kbd>}
         variant="shadow"
-        color="primary"
+        color="secondary"
+        onPressChange={() => router.push('/')}
       >
         New Chat
       </Button>
 
-      <ul>
+      <ul className="mt-4 space-y-4">
         {chats.map((chat) => (
-          <li key={chat.id} className="py-1">
-            {chat.name}
-          </li>
+          <ChatItem chat={chat} key={chat.id} />
         ))}
       </ul>
     </div>
