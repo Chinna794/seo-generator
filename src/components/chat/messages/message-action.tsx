@@ -14,7 +14,7 @@ export const MessageAction = ({
 } & ButtonProps) => {
   return (
     <Tooltip content={label} placement="bottom">
-      <Button size="sm" isIconOnly variant="faded" className={cn(className)} {...props}>
+      <Button size="sm" isIconOnly variant="ghost" className={cn(className)} {...props}>
         {children}
       </Button>
     </Tooltip>

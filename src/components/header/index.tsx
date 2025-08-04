@@ -5,7 +5,7 @@ import { Navigation } from './navigation';
 
 export function Header() {
   return (
-    <Card as="header" fullWidth className="h-fit">
+    <Card as="header" fullWidth className="mt-6 h-fit">
       <CardBody>
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start gap-2">

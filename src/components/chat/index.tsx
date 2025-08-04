@@ -11,15 +11,19 @@ import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
 import { MessageType } from 'type/chat';
 import { messageLimit } from 'constants/message';
+import { useRotatingPrompt } from 'hooks/use-rotating-placeholders';
+import { ChatTextarea } from './chat-textarea';
 
 export function Chat() {
   const [messageValue, setMessageValue] = React.useState('');
-
   const { addNewChat, addMessage } = useChatTabsStore();
   const pathname = usePathname();
   const router = useRouter();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const params = useParams<{ id: string }>();
+  const rotatingPlaceholder = useRotatingPrompt();
+
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value;
@@ -49,24 +53,30 @@ export function Chat() {
     setMessageValue('');
   };
 
-  // Handler for the button to trigger file input click
   const handleAttachFile = () => {
     fileInputRef.current?.click();
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && event.altKey && messageValue) {
+      event.preventDefault();
+      formRef.current?.requestSubmit?.();
+    }
+  };
+
   return (
-    <Card className="m-0 mb-12 flex-none">
+    <Card className="sticky bottom-[10px] m-0 flex-none shadow-2xl">
       <CardBody>
-        <form onSubmit={handleSubmitMessage}>
+        <form ref={formRef} onSubmit={handleSubmitMessage}>
           <div className="grid grid-cols-[1fr_50px]">
-            <textarea
-              placeholder="Send a message to create your perfect SEO"
-              className="resize-none outline-none"
+            <ChatTextarea
+              placeholder={rotatingPlaceholder}
               rows={4}
               value={messageValue}
               onChange={handleChangeMessage}
               maxLength={messageLimit}
               name="message"
+              onKeyDown={handleKeyDown}
             />
             <Tooltip content={<Kbd keys={['alt', 'enter']} />} showArrow={true}>
               <Button isIconOnly color={!messageValue ? 'default' : 'primary'} type="submit" disabled={!messageValue}>
@@ -90,13 +100,13 @@ export function Chat() {
                   startContent={<IoIosAttach className="size-5 rotate-45" />}
                   size="sm"
                   onPress={handleAttachFile}
-                  variant="faded"
+                  variant="ghost"
                 >
                   Attach File
                 </Button>
               </div>
               <div>
-                <Button type="button" startContent={<HiTemplate className="size-5" />} size="sm" variant="faded">
+                <Button type="button" startContent={<HiTemplate className="size-5" />} size="sm" variant="ghost">
                   Templates
                 </Button>
               </div>

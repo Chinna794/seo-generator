@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Main() {
   return (
-    <AppLayout className="gap-4">
+    <AppLayout>
       <ChatContainer />
     </AppLayout>
   );

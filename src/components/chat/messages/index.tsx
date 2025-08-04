@@ -1,13 +1,19 @@
-'use client';
 import { useParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useChatTabsStore } from 'store/chat-tabs-store';
 import { Message } from './message';
+import { ScrollShadow } from '@heroui/react';
 
 export const Messages = () => {
   const params = useParams<{ id: string }>();
   const { chats } = useChatTabsStore();
   const chat = chats.find((chat) => chat.id === params?.id);
+
+  const endOfMessagesRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chat?.messages?.length]);
 
   if (!chat) {
     return (
@@ -18,10 +24,11 @@ export const Messages = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4 pt-12">
+    <ScrollShadow className="flex flex-col gap-4 pt-12" hideScrollBar>
       {chat.messages?.map((message) => (
         <Message key={message.id} message={message} />
       ))}
-    </div>
+      <div ref={endOfMessagesRef} className="h-0" />
+    </ScrollShadow>
   );
 };

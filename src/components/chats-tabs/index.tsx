@@ -5,13 +5,13 @@ import { useChatTabsStore } from 'store/chat-tabs-store';
 import { FiEdit } from 'react-icons/fi';
 import { HighlightSpan } from 'components/common/highlight-span';
 import { ChatItem } from './chat-item';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export const ChatTabs = () => {
   const { chats } = useChatTabsStore();
-  const router = useRouter();
-
-  const handleStartNewChat = () => {};
+  const pathname = usePathname();
+  const isRootRoute = pathname === '/';
 
   return (
     <div className="pt-4">
@@ -20,14 +20,14 @@ export const ChatTabs = () => {
       </HighlightSpan>
       <Divider />
       <Button
-        onPress={handleStartNewChat}
+        as={Link}
         fullWidth
         className="group my-2 transition"
         startContent={<FiEdit />}
         endContent={<Kbd keys={['command', 'shift']}>O</Kbd>}
         variant="shadow"
-        color="secondary"
-        onPressChange={() => router.push('/')}
+        color={isRootRoute ? 'secondary' : 'default'}
+        href="/"
       >
         New Chat
       </Button>
