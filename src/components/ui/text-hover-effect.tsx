@@ -1,14 +1,14 @@
 'use client';
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 
 export const TextHoverEffect = ({ text, duration }: { text: string; duration?: number; automatic?: boolean }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [hovered, setHovered] = useState(false);
-  const [maskPosition, setMaskPosition] = useState({ cx: '50%', cy: '50%' });
+  const svgRef = React.useRef<SVGSVGElement>(null);
+  const [cursor, setCursor] = React.useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = React.useState(false);
+  const [maskPosition, setMaskPosition] = React.useState({ cx: '50%', cy: '50%' });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (svgRef.current && cursor.x !== null && cursor.y !== null) {
       const svgRect = svgRef.current.getBoundingClientRect();
       const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;

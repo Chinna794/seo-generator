@@ -10,8 +10,8 @@ import { useChatTabsStore } from 'store/chat-tabs-store';
 import { nanoid } from 'nanoid';
 import { useRouter } from 'next/navigation';
 import { MessageType } from 'type/chat';
+import { messageLimit } from 'constants/message';
 
-const messageLimit = 2000;
 export function Chat() {
   const [messageValue, setMessageValue] = React.useState('');
 
