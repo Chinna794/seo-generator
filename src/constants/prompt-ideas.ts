@@ -1,4 +1,9 @@
-export const promptIdeas = [
+export type PropmtIdea = {
+  title: string;
+  description: string;
+};
+
+export const promptIdeas: PropmtIdea[] = [
   {
     title: 'Create a blog post about HeroUI',
     description: 'explain it in simple terms',

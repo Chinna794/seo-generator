@@ -20,18 +20,21 @@ import { cn } from 'lib/utils';
 import { PromptInput } from 'components/prompt-input';
 import { ChatIdeas } from './ideas';
 import { OSType, useDetectOS } from 'hooks/use-detect-os';
+import { PropmtIdea } from 'constants/prompt-ideas';
 
 export function Chat() {
   const [messageValue, setMessageValue] = React.useState('');
+
   const { addNewChat, addMessage } = useChatTabsStore();
   const { isSameRoute } = useMatchRoute(AppRoutes.Chat);
   const router = useRouter();
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const params = useParams<{ id: string }>();
   const rotatingPlaceholder = useRotatingPrompt();
-  const { os } = useDetectOS();
+  const { os, isMac, isWin } = useDetectOS();
 
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const formRef = React.useRef<HTMLFormElement>(null);
+  const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   const handleChangeMessage = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value;
@@ -66,8 +69,6 @@ export function Chat() {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const isEnter = event.key === 'Enter';
-    const isMac = os === OSType.MacOS;
-    const isWin = os === OSType.Windows;
     const isValid = !!messageValue;
 
     // Mac: Option(Alt) + Enter | Windows: Ctrl + Enter
@@ -79,11 +80,16 @@ export function Chat() {
     }
   };
 
+  const handleClickOnIdea = (idea: PropmtIdea) => {
+    setMessageValue(`${idea.title} - ${idea.description} `);
+    inputRef.current?.focus();
+  };
+
   // eslint-disable-next-line no-constant-condition
   if (true) {
     return (
-      <div className="flex w-full flex-col gap-4">
-        <ChatIdeas messageValue={messageValue} setMessageValue={setMessageValue} />
+      <div className="sticky bottom-5 flex w-full flex-col gap-4">
+        <ChatIdeas messageValue={messageValue} onClickIdeaAction={handleClickOnIdea} />
         <form
           className="flex w-full flex-col items-start rounded-medium bg-default-100 transition-colors hover:bg-default-200/70"
           onSubmit={handleSubmitMessage}
@@ -95,6 +101,7 @@ export function Chat() {
               innerWrapper: 'relative',
               input: 'pt-1 pl-2 pb-6 !pr-10 text-medium',
             }}
+            name="message"
             onKeyDown={handleKeyDown}
             endContent={
               <div className="flex items-end gap-2">
@@ -133,16 +140,28 @@ export function Chat() {
             value={messageValue}
             variant="flat"
             onValueChange={(value) => setMessageValue(value)}
+            ref={inputRef}
           />
           <div className="flex w-full items-center justify-between gap-2 overflow-auto px-4 pb-4">
             <div className="flex w-full gap-1 md:gap-3">
-              <Button
-                size="sm"
-                startContent={<Icon className="text-default-500" icon="solar:paperclip-linear" width={18} />}
-                variant="flat"
-              >
-                Attach
-              </Button>
+              <div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="sr-only"
+                  tabIndex={-1}
+                  name="file"
+                  accept=".html,.js,.jsx,.tsx,image/png,image/jpeg"
+                />
+                <Button
+                  size="sm"
+                  startContent={<Icon className="text-default-500" icon="solar:paperclip-linear" width={18} />}
+                  variant="flat"
+                  onPress={handleAttachFile}
+                >
+                  Attach
+                </Button>
+              </div>
               <Button
                 size="sm"
                 startContent={<Icon className="text-default-500" icon="solar:soundwave-linear" width={18} />}
@@ -157,6 +176,20 @@ export function Chat() {
               >
                 Templates
               </Button>
+              {messageValue.length ? (
+                <Button
+                  size="sm"
+                  variant="shadow"
+                  color="danger"
+                  startContent={<Icon icon="lucide:x" width={18} />}
+                  onPress={() => {
+                    setMessageValue('');
+                    inputRef.current?.focus();
+                  }}
+                >
+                  Clear
+                </Button>
+              ) : null}
             </div>
             <p className="py-1 text-tiny text-default-400">{messageValue.length}/2000</p>
           </div>

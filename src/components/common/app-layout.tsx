@@ -4,7 +4,7 @@ import React from 'react';
 
 export function AppLayout({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <main className={cn('container mx-auto overflow-y-hidden', className)}>
+    <main className={cn('container mx-auto flex h-dvh flex-col overflow-y-hidden', className)}>
       <Header />
       {children}
     </main>

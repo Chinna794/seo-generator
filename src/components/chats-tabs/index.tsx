@@ -14,13 +14,14 @@ export const ChatTabs = () => {
   const { isSameRoute } = useMatchRoute(AppRoutes.Chat);
 
   return (
-    <div className="pt-4">
+    <div className="my-4 rounded-2xl bg-neutral-950 p-4">
       <HighlightSpan as="p" className="mb-2">
         All my generations
       </HighlightSpan>
       <Button
         as={Link}
         className="group my-2 transition"
+        fullWidth
         startContent={<FiEdit />}
         endContent={<Kbd keys={['command', 'shift']}>O</Kbd>}
         variant="shadow"
@@ -30,7 +31,7 @@ export const ChatTabs = () => {
         New Chat
       </Button>
 
-      <ul className="mt-4 space-y-4">
+      <ul className="mt-4 flex flex-col-reverse items-start gap-y-4">
         {chats.map((chat) => (
           <ChatItem chat={chat} key={chat.id} />
         ))}

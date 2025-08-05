@@ -24,7 +24,7 @@ export const Messages = () => {
   }
 
   return (
-    <ScrollShadow className="flex flex-col gap-4 pt-12" hideScrollBar>
+    <ScrollShadow className="flex h-[600px] min-h-0 flex-col gap-4 pt-8" hideScrollBar>
       {chat.messages?.map((message) => (
         <Message key={message.id} message={message} />
       ))}

@@ -39,7 +39,7 @@ function detectOSFromUA(userAgent: string): OSType {
   return OSType.Other;
 }
 
-export function useDetectOS(): OSInfo {
+export function useDetectOS() {
   const [osInfo, setOSInfo] = useState<OSInfo>({
     os: OSType.Other,
     rawUA: '',
@@ -76,5 +76,12 @@ export function useDetectOS(): OSInfo {
     }
   }, []);
 
-  return osInfo;
+  const isMac = osInfo.os === OSType.MacOS;
+  const isWin = osInfo.os === OSType.Windows;
+
+  return {
+    ...osInfo,
+    isMac,
+    isWin,
+  };
 }

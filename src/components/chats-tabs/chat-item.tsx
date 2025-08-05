@@ -18,9 +18,10 @@ export function ChatItem({ chat }: { chat: Chat }) {
       as={Link}
       href={`${AppRoutes.Chat}/${chat.id}`}
       key={chat.id}
-      className={cn('py-1')}
+      className={cn('truncate py-1')}
       color={isActiveChat ? 'primary' : 'default'}
       startContent={<HiOutlineChatAlt />}
+      fullWidth
     >
       {chat.name}
     </Button>

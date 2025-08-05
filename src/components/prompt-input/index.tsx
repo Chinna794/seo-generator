@@ -22,6 +22,7 @@ export const PromptInput = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         placeholder="Enter a prompt here"
         radius="lg"
         variant="bordered"
+        autoFocus
         {...props}
       />
     );
