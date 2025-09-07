@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["heroui", "Hoverable", "iconify", "Pressable", "Roboto", "soundwave", "Stylesheet"]
+  "cSpell.words": [
+    "heroui",
+    "Hoverable",
+    "hreflangs",
+    "iconify",
+    "Pressable",
+    "Roboto",
+    "Serp",
+    "soundwave",
+    "Stylesheet"
+  ],
+  "biome.enabled": false
 }

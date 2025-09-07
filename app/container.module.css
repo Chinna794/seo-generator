@@ -1,0 +1,10 @@
+/* Para Chrome, Safari y Opera */
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Para Firefox */
+.container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
