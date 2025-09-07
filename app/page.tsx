@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import OfficialDebuggers from "./_components/debugger";
+import GenerateTags from "./_components/generate-tags";
 import Header from "./_components/header";
 import FacebookPreview from "./_components/preview/facebook-preview";
 import GooglePreview from "./_components/preview/google-preview";
@@ -19,7 +20,10 @@ export default function Home() {
           <OfficialDebuggers />
         </div>
         <div>
-          <p className={"containerTitle"}>Preview</p>
+          <div className="flex items-center justify-between">
+            <p className={"containerTitle"}>Preview</p>
+            <GenerateTags />
+          </div>
           <div className="mt-6 space-y-10">
             <GooglePreview />
             <TwitterPreview />
