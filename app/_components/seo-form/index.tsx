@@ -3,6 +3,7 @@ import KeyCommand from "@/components/key-command";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { getHostnameFromUrl } from "@/lib/get-hostname-from-url";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -137,9 +138,8 @@ export default function SeoForm() {
                       <Input
                         {...field}
                         className="-ms-px rounded-s-none shadow-none"
-                        placeholder="seo-generator.vercel.app"
                         type="text"
-                        value={url}
+                        placeholder={getHostnameFromUrl(url!)!}
                         onChange={(event) => setUrl(event.target.value)}
                       />
                     </div>

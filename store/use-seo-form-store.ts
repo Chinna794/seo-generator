@@ -19,6 +19,6 @@ export const useSeoFormStore = create<SeoFormState>((set) => ({
   setDescription: (description: string) => set({ description }),
   imageFile: undefined,
   setImageFile: (imageFile: string | number | readonly string[] | undefined) => set({ imageFile }),
-  url: "seo-generator.vercel.app",
+  url: "https://seo-generator.vercel.app",
   setUrl: (url: string) => set({ url }),
 }));
