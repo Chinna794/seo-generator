@@ -1,6 +1,4 @@
 import { cn } from "@/lib/utils";
-import { SeoForm } from "./_components/seo-form";
-import SEOPreview from "./_components/seo-preview";
 import styles from "./container.module.css";
 
 export default function Home() {
@@ -12,13 +10,11 @@ export default function Home() {
       )}
     >
       <div className={cn("h-full overflow-y-scroll", styles.container)}>
-        <SeoForm />
+        form here
         <div>4</div>
         <div>5</div>
       </div>
-      <div className="h-full">
-        <SEOPreview />
-      </div>
+      <div className="h-full">preview</div>
     </main>
   );
 }
