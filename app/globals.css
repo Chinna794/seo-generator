@@ -120,3 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.containerTitle {
+  @apply text-sm font-semibold uppercase opacity-80 transition hover:opacity-100;
+}

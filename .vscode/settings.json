@@ -10,5 +10,8 @@
     "soundwave",
     "Stylesheet"
   ],
-  "biome.enabled": false
+  "biome.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  }
 }
