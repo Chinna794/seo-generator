@@ -1,3 +1,4 @@
+import { FileWithPreview } from "@/hooks/use-file-upload";
 import { create } from "zustand";
 
 export type SeoFormState = {
@@ -5,8 +6,8 @@ export type SeoFormState = {
   setTitle: (title: string) => void;
   description?: string;
   setDescription?: (description: string) => void;
-  imageFile: string | number | readonly string[] | undefined;
-  setImageFile: (image: string | number | readonly string[] | undefined) => void;
+  imageFile: FileWithPreview | undefined;
+  setImageFile: (image: FileWithPreview) => void;
   url?: string;
   setUrl?: (url: string) => void;
 };
@@ -18,7 +19,7 @@ export const useSeoFormStore = create<SeoFormState>((set) => ({
     "With SEO Generator you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, X and more!",
   setDescription: (description: string) => set({ description }),
   imageFile: undefined,
-  setImageFile: (imageFile: string | number | readonly string[] | undefined) => set({ imageFile }),
+  setImageFile: (imageFile: FileWithPreview) => set({ imageFile }),
   url: "https://seo-generator.vercel.app",
   setUrl: (url: string) => set({ url }),
   getIsFormComplete: (): boolean => {

@@ -19,16 +19,7 @@ const seoFormSchema = z.object({
 });
 
 export default function SeoForm() {
-  const {
-    title,
-    setTitle,
-    description,
-    setDescription = () => {},
-    imageFile,
-    setImageFile = () => {},
-    url,
-    setUrl = () => {},
-  } = useSeoFormStore();
+  const { title, setTitle, description, setDescription, imageFile, url, setUrl = () => {} } = useSeoFormStore();
 
   const { titleMaxLength, descriptionMaxLength } = useSettingsStore();
 
@@ -97,7 +88,7 @@ export default function SeoForm() {
                     {...field}
                     className="max-h-32"
                     value={description}
-                    onChange={(event) => setDescription(event.target.value)}
+                    onChange={(event) => setDescription?.(event.target.value)}
                     maxLength={descriptionMaxLength}
                   />
                 </FormControl>

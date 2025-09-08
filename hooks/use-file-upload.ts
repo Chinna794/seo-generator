@@ -1,5 +1,6 @@
 "use client";
 
+import { useSeoFormStore } from "@/store/use-seo-form-store";
 import type React from "react";
 import { useCallback, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from "react";
 
@@ -61,6 +62,8 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
     onFilesChange,
     onFilesAdded,
   } = options;
+
+  const { setImageFile } = useSeoFormStore();
 
   const [state, setState] = useState<FileUploadState>({
     files: initialFiles.map((file) => ({
@@ -201,11 +204,13 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
         if (error) {
           errors.push(error);
         } else {
-          validFiles.push({
+          const newFile: FileWithPreview = {
             file,
             id: generateUniqueId(file),
             preview: createPreview(file),
-          });
+          };
+          setImageFile(newFile); // Update the store with the selected file
+          validFiles.push(newFile);
         }
       });
 
@@ -246,6 +251,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
       clearFiles,
       onFilesChange,
       onFilesAdded,
+      setImageFile,
     ],
   );
 
@@ -344,7 +350,7 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
   }, []);
 
   const getInputProps = useCallback(
-    (props: InputHTMLAttributes<HTMLInputElement> = {}) => {
+    (props: InputHTMLAttributes<HTMLInputElement> = { onChange: () => {} }) => {
       return {
         ...props,
         type: "file" as const,
