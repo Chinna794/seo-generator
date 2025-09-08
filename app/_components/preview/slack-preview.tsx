@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function SlackPreview() {
-  const { title, description, url } = useSeoFormStore();
+  const { title, description, url, imageFile } = useSeoFormStore();
   return (
     <div>
       <Label className="mb-6">
@@ -25,7 +25,13 @@ export default function SlackPreview() {
         </div>
         <p className="font-semibold text-[#1698e4] group-hover:underline">{title}</p>
         <p className="text-neutral-300">{description}</p>
-        <Image src={"/placeholder.jpg"} alt="Slack Preview" width={350} height={200} className="rounded-md" />
+        <Image
+          src={imageFile?.preview || "/placeholder.jpg"}
+          alt="Slack Preview"
+          width={350}
+          height={200}
+          className="rounded-md"
+        />
       </Link>
     </div>
   );

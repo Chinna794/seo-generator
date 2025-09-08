@@ -5,7 +5,7 @@ import { ChevronDownIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function GooglePreview() {
-  const { title, description, imageFile, url } = useSeoFormStore();
+  const { title, description, url } = useSeoFormStore();
 
   return (
     <div>

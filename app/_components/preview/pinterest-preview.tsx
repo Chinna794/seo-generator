@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function PinterestPreview() {
-  const { title, url } = useSeoFormStore();
+  const { title, url, imageFile } = useSeoFormStore();
 
   return (
     <div>
@@ -15,7 +15,7 @@ export default function PinterestPreview() {
       </Label>
       <Link href={url!} target="_blank" rel="noopener noreferrer" className="group block w-[300px]">
         <div className="relative h-[200px] w-[300px]">
-          <Image src={"/placeholder.jpg"} alt="Pinterest Preview" fill className="rounded-md" />
+          <Image src={imageFile?.preview || "/placeholder.jpg"} alt="Pinterest Preview" fill className="rounded-md" />
         </div>
         <p className="mt-1 text-sm text-neutral-300 group-hover:underline">{title}</p>
       </Link>

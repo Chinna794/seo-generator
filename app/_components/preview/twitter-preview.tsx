@@ -2,11 +2,13 @@ import { Twitter, XformerlyTwitter } from "@/components/icons/twitter";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { getHostnameFromUrl } from "@/lib/get-hostname-from-url";
+import { cn } from "@/lib/utils";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function TwitterPreview() {
-  const { title, description, imageFile, url } = useSeoFormStore();
+  const { title, imageFile, url } = useSeoFormStore();
 
   return (
     <div>
@@ -17,8 +19,14 @@ export default function TwitterPreview() {
         Twitter
       </Label>
       <Link href={url!} target="_blank" rel="noopener noreferrer" className="group">
-        <div className="flex h-[250px] items-end rounded-2xl bg-[url('/placeholder.jpg')] bg-cover bg-center bg-no-repeat p-4">
-          <Badge variant={"secondary"} className="w-full truncate">
+        <div className={cn("relative flex h-[250px] items-end rounded-2xl bg-cover bg-center bg-no-repeat p-4")}>
+          <Image
+            src={imageFile?.preview || "/placeholder.jpg"}
+            layout="fill"
+            className="rounded-2xl object-cover"
+            alt="Twitter Preview"
+          />
+          <Badge variant={"secondary"} className="z-10 w-full truncate">
             {title}
           </Badge>
         </div>
