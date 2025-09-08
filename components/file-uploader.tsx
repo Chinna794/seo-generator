@@ -4,6 +4,7 @@ import { AlertCircleIcon, ImageUpIcon, XIcon } from "lucide-react";
 
 import { useFileUpload } from "@/hooks/use-file-upload";
 import Image from "next/image";
+import { Input } from "./ui/input";
 
 export default function FileUploader(props: React.ComponentProps<"input">) {
   const maxSizeMB = 5;
@@ -33,7 +34,7 @@ export default function FileUploader(props: React.ComponentProps<"input">) {
           data-dragging={isDragging || undefined}
           className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 has-disabled:pointer-events-none has-disabled:opacity-50 relative flex min-h-52 flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed p-4 transition-colors has-[img]:border-none has-[input:focus]:ring-[3px]"
         >
-          <input {...props} {...getInputProps()} className="sr-only" aria-label="Upload file" />
+          <Input {...props} {...getInputProps()} className="sr-only" aria-label="Upload file" />
           {previewUrl ? (
             <div className="absolute inset-0">
               <div>
