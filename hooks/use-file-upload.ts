@@ -147,7 +147,6 @@ export const useFileUpload = (options: FileUploadOptions = {}): [FileUploadState
         files: [],
         errors: [],
       };
-
       onFilesChange?.(newState.files);
       return newState;
     });

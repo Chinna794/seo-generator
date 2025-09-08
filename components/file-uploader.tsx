@@ -2,7 +2,8 @@
 
 import { AlertCircleIcon, ImageUpIcon, XIcon } from "lucide-react";
 
-import { useFileUpload } from "@/hooks/use-file-upload";
+import { FileWithPreview, useFileUpload } from "@/hooks/use-file-upload";
+import { useSeoFormStore } from "@/store/use-seo-form-store";
 import Image from "next/image";
 import { Input } from "./ui/input";
 
@@ -10,6 +11,7 @@ export default function FileUploader(props: React.ComponentProps<"input">) {
   const maxSizeMB = 5;
   const maxSize = maxSizeMB * 1024 * 1024; // 5MB default
 
+  const { setImageFile } = useSeoFormStore();
   const [
     { files, isDragging, errors },
     { handleDragEnter, handleDragLeave, handleDragOver, handleDrop, openFileDialog, removeFile, getInputProps },
@@ -64,7 +66,10 @@ export default function FileUploader(props: React.ComponentProps<"input">) {
             <button
               type="button"
               className="focus-visible:border-ring focus-visible:ring-ring/50 z-50 flex size-8 cursor-pointer items-center justify-center rounded-full bg-black/60 text-white outline-none transition-[color,box-shadow] hover:bg-black/80 focus-visible:ring-[3px]"
-              onClick={() => removeFile(files[0]?.id)}
+              onClick={() => {
+                setImageFile({} as FileWithPreview);
+                removeFile(files[0]?.id);
+              }}
               aria-label="Remove image"
             >
               <XIcon className="size-4" aria-hidden="true" />
