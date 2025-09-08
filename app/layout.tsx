@@ -26,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.svg" sizes="any" />
+      </head>
       <body className={cn(geistSans.variable, geistMono.variable, "antialiased", styles.container)}>{children}</body>
     </html>
   );
