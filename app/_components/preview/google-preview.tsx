@@ -9,7 +9,7 @@ export default function GooglePreview() {
   return (
     <div>
       <Label className="mb-4">Google</Label>
-      <div className="max-w-[500px]">
+      <div className="">
         <Link href={"/"} className="font-semibold text-[#99c3ff] transition hover:brightness-125">
           {title}
         </Link>

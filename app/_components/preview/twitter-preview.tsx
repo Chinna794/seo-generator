@@ -10,7 +10,7 @@ export default function TwitterPreview() {
   return (
     <div>
       <Label className="mb-4">X (Formerly Twitter)</Label>
-      <div className="flex h-[250px] w-[500px] items-end rounded-2xl bg-[url('/placeholder.jpg')] bg-cover bg-center bg-no-repeat p-4">
+      <div className="flex h-[250px] items-end rounded-2xl bg-[url('/placeholder.jpg')] bg-cover bg-center bg-no-repeat p-4">
         <Badge variant={"secondary"} className="truncate">
           {title}
         </Badge>

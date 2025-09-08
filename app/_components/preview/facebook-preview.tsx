@@ -9,7 +9,7 @@ export default function FacebookPreview() {
   return (
     <div>
       <Label className="mb-6">Facebook</Label>
-      <div className="group w-[500px] cursor-pointer rounded-sm border bg-neutral-800 transition hover:brightness-95">
+      <div className="group cursor-pointer rounded-sm border bg-neutral-800 transition hover:brightness-95">
         <Image src={"/placeholder.jpg"} alt="Facebook Preview" layout="responsive" width={500} height={250} />
         <div className="border-t px-3 py-2.5">
           <p className="text-sm uppercase text-neutral-400">{getHostnameFromUrl(url!)}</p>

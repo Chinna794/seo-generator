@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <main aria-labelledby="container" className={cn("mx-auto max-w-6xl px-8 pb-12 xl:px-4")}>
       <Header />
-      <section className="mt-10 grid grid-cols-[350px_1fr] items-start justify-center gap-20">
-        <div className={cn("sticky top-0 h-fit overflow-y-auto")}>
+      <section className="mt-10 grid grid-cols-2 items-start justify-center gap-20">
+        <div className={cn("sticky -top-6 h-fit overflow-y-auto pr-20")}>
           <p className={"containerTitle"}>Metadata</p>
           <SeoForm />
           <OfficialDebuggers />

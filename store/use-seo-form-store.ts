@@ -21,4 +21,14 @@ export const useSeoFormStore = create<SeoFormState>((set) => ({
   setImageFile: (imageFile: string | number | readonly string[] | undefined) => set({ imageFile }),
   url: "https://seo-generator.vercel.app",
   setUrl: (url: string) => set({ url }),
+  getIsFormComplete: (): boolean => {
+    const { title, description, imageFile, url } = useSeoFormStore.getState();
+
+    const hasTitle = typeof title === "string" && title.trim().length > 0;
+    const hasDescription = typeof description === "string" && description.trim().length > 0;
+    const hasImage = imageFile instanceof File;
+    const hasUrl = typeof url === "string" && /^https?:\/\/.+/.test(url.trim());
+
+    return hasTitle && hasDescription && hasImage && hasUrl;
+  },
 }));

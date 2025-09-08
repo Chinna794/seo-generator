@@ -9,7 +9,7 @@ export default function SlackPreview() {
   return (
     <div>
       <Label className="mb-6">Slack</Label>
-      <div className="group max-w-[500px] cursor-pointer space-y-2 rounded-r-lg border-l-4 border-neutral-700 bg-neutral-900/50 p-4 pl-4">
+      <div className="group cursor-pointer space-y-2 rounded-r-lg border-l-4 border-neutral-700 bg-neutral-900/50 p-4 pl-4">
         <div className="flex items-center gap-2">
           <FaviconExample color="#2a81fb" className="size-5" />
           <Link href={url!} className="capitalize text-neutral-500">
