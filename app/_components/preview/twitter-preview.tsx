@@ -26,7 +26,7 @@ export default function TwitterPreview() {
             className="rounded-2xl object-cover"
             alt="Twitter Preview"
           />
-          <Badge variant={"secondary"} className="z-10 w-full truncate">
+          <Badge variant={"secondary"} className="z-10 w-fit justify-start truncate">
             {title}
           </Badge>
         </div>
