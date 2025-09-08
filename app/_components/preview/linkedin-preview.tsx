@@ -1,18 +1,18 @@
-import { Facebook } from "@/components/icons/facebook";
+import { LinkedIn } from "@/components/icons/linkedin";
 import { Label } from "@/components/ui/label";
 import { getHostnameFromUrl } from "@/lib/get-hostname-from-url";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function FacebookPreview() {
+export default function LinkedinPreview() {
   const { url, title, description } = useSeoFormStore();
 
   return (
     <div>
       <Label className="mb-6">
-        <Facebook />
-        Facebook
+        <LinkedIn />
+        LinkedIn
       </Label>
       <Link
         href={url!}
@@ -22,9 +22,8 @@ export default function FacebookPreview() {
       >
         <Image src={"/placeholder.jpg"} alt="Facebook Preview" layout="responsive" width={500} height={250} />
         <div className="border-t px-3 py-2.5">
-          <p className="text-sm uppercase text-neutral-400">{getHostnameFromUrl(url!)}</p>
-          <p className="font-semibold">{title}</p>
-          <p className="truncate text-sm text-neutral-400">{description}</p>
+          <p>{title}</p>
+          <p className="text-xs uppercase text-neutral-400">{getHostnameFromUrl(url!)}</p>
         </div>
       </Link>
     </div>

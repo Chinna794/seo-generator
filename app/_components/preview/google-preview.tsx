@@ -1,3 +1,4 @@
+import { Google } from "@/components/icons/google";
 import { Label } from "@/components/ui/label";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
 import { ChevronDownIcon } from "lucide-react";
@@ -8,9 +9,12 @@ export default function GooglePreview() {
 
   return (
     <div>
-      <Label className="mb-4">Google</Label>
+      <Label className="mb-6">
+        <Google />
+        Google
+      </Label>
       <div className="">
-        <Link href={"/"} className="font-semibold text-[#99c3ff] transition hover:brightness-125">
+        <Link href={url!} className="font-semibold text-[#99c3ff] transition hover:brightness-125">
           {title}
         </Link>
         <span className="flex items-center text-sm text-[#00b339] transition hover:underline">

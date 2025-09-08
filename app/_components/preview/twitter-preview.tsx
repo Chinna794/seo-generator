@@ -1,3 +1,4 @@
+import { Twitter, XformerlyTwitter } from "@/components/icons/twitter";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { getHostnameFromUrl } from "@/lib/get-hostname-from-url";
@@ -9,14 +10,19 @@ export default function TwitterPreview() {
 
   return (
     <div>
-      <Label className="mb-4">X (Formerly Twitter)</Label>
-      <div className="flex h-[250px] items-end rounded-2xl bg-[url('/placeholder.jpg')] bg-cover bg-center bg-no-repeat p-4">
-        <Badge variant={"secondary"} className="truncate">
-          {title}
-        </Badge>
-      </div>
-      <Link className="mt-1 text-xs text-neutral-400 hover:underline" href={"/"}>
-        From {getHostnameFromUrl(url!)}
+      <Label className="mb-4">
+        <XformerlyTwitter />
+        Formerly
+        <Twitter />
+        Twitter
+      </Label>
+      <Link href={url!} target="_blank" rel="noopener noreferrer" className="group">
+        <div className="flex h-[250px] items-end rounded-2xl bg-[url('/placeholder.jpg')] bg-cover bg-center bg-no-repeat p-4">
+          <Badge variant={"secondary"} className="w-full truncate">
+            {title}
+          </Badge>
+        </div>
+        <span className="mt-1 text-xs text-neutral-400 group-hover:underline">From {getHostnameFromUrl(url!)}</span>
       </Link>
     </div>
   );
