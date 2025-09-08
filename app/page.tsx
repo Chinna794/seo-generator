@@ -1,4 +1,5 @@
 "use client";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { Fragment } from "react";
 import OfficialDebuggers from "./_components/debugger";
@@ -6,6 +7,7 @@ import GenerateTags from "./_components/generate-tags";
 import Header from "./_components/header";
 import { previews } from "./_components/preview/previews";
 import SeoForm from "./_components/seo-form";
+import { Settings } from "./_components/settings";
 
 export default function Home() {
   return (
@@ -16,6 +18,10 @@ export default function Home() {
           <p className={"containerTitle"}>Metadata</p>
           <SeoForm />
           <OfficialDebuggers />
+          <div className="mt-10">
+            <Label className="mb-6">Extras</Label>
+            <Settings />
+          </div>
         </div>
         <div>
           <div className="flex items-center justify-between">

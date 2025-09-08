@@ -12,8 +12,8 @@ import { ArrowRightIcon } from "lucide-react";
 export default function GenerateTags() {
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button className="bg-[#1877f2] text-white after:flex-1 hover:bg-[#1877f2]/90">
+      <DialogTrigger asChild>
+        <Button className="cursor-pointer bg-blue-600 text-white transition-all after:flex-1 hover:bg-blue-500/90 active:scale-95">
           Generate Metadata
           <span className="pointer-events-none flex-1">
             <ArrowRightIcon className="opacity-60" size={16} aria-hidden="true" />

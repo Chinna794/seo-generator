@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { getHostnameFromUrl } from "@/lib/get-hostname-from-url";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
+import { useSettingsStore } from "@/store/use-settings-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,6 +29,8 @@ export default function SeoForm() {
     url,
     setUrl = () => {},
   } = useSeoFormStore();
+
+  const { titleMaxLength, descriptionMaxLength } = useSettingsStore();
 
   const seoForm = useForm({
     resolver: zodResolver(seoFormSchema),
@@ -53,7 +56,7 @@ export default function SeoForm() {
               <FormItem>
                 <FormLabelWithCounter
                   count={title.length}
-                  max={60}
+                  max={titleMaxLength}
                   tooltip={<p>Recommended keep titles under 60 characters for proper display in search results</p>}
                 >
                   Title
@@ -61,7 +64,7 @@ export default function SeoForm() {
                 <FormControl>
                   <Input
                     {...field}
-                    maxLength={60}
+                    maxLength={titleMaxLength}
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     className="text-lg"
@@ -82,7 +85,7 @@ export default function SeoForm() {
               <FormItem>
                 <FormLabelWithCounter
                   count={description?.length ?? 0}
-                  max={160}
+                  max={descriptionMaxLength}
                   tooltip={
                     <p>Recommended keep descriptions under 160 characters for proper display in search results</p>
                   }
@@ -95,7 +98,7 @@ export default function SeoForm() {
                     className="max-h-32"
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
-                    maxLength={160}
+                    maxLength={descriptionMaxLength}
                   />
                 </FormControl>
                 <FormDescription>
