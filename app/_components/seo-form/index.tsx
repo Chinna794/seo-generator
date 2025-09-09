@@ -11,15 +11,20 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormLabelWithCounter from "./form-label-with-counter";
 
-
 export default function SeoForm() {
   const { title, setTitle, description, setDescription, imageFile, url, setUrl = () => {} } = useSeoFormStore();
 
   const { titleMaxLength, descriptionMaxLength } = useSettingsStore();
 
   const seoFormSchema = z.object({
-    title: z.string().min(1, "Title is required").max(titleMaxLength, `Title must be less than ${titleMaxLength} characters`),
-    description: z.string().max(descriptionMaxLength, `Description must be less than ${descriptionMaxLength} characters`).optional(),
+    title: z
+      .string()
+      .min(1, "Title is required")
+      .max(titleMaxLength, `Title must be less than ${titleMaxLength} characters`),
+    description: z
+      .string()
+      .max(descriptionMaxLength, `Description must be less than ${descriptionMaxLength} characters`)
+      .optional(),
     imageFile: z.any().optional(),
     url: z.url().optional(),
   });
@@ -33,15 +38,7 @@ export default function SeoForm() {
   });
 
   const onSubmit = (data: z.infer<typeof seoFormSchema>) => {
-    setTitle(data.title);
-    setDescription(data.description ?? "");
-    // If you have a setter for imageFile, update it as well
-    if (typeof useSeoFormStore.setImageFile === "function") {
-      useSeoFormStore.setImageFile(data.imageFile);
-    }
-    if (typeof setUrl === "function" && data.url) {
-      setUrl(data.url);
-    }
+    // Form is automatically synced with Zustand store via controlled components
   };
 
   return (
