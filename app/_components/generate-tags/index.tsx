@@ -24,8 +24,8 @@ export default function GenerateTags() {
         <DialogHeader>
           <DialogTitle>Generate Metadata</DialogTitle>
           <DialogDescription>
-            Click "Confirm" to automatically generate metadata tags for your content. This will help improve SEO and social sharing.
-            You can review and edit the generated tags before saving.
+            Click &quot;Confirm&quot; to automatically generate metadata tags for your content. This will help improve
+            SEO and social sharing. You can review and edit the generated tags before saving.
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
