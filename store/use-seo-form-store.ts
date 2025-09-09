@@ -9,7 +9,7 @@ export type SeoFormState = {
   imageFile: FileWithPreview | undefined;
   setImageFile: (image: FileWithPreview) => void;
   url?: string;
-  setUrl?: (url: string) => void;
+  setUrl: (url: string) => void;
   getIsFormComplete: () => boolean;
 };
 
