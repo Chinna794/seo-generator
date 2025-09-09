@@ -6,7 +6,7 @@ export type SettingsStore = {
   descriptionMaxLength: number;
   setDescriptionMaxLength: (length: number) => void;
   isFileImage: boolean;
-  setIsFileImage?: (isFileImage: boolean) => void;
+  setIsFileImage: (isFileImage: boolean) => void;
 };
 
 export const useSettingsStore = create<SettingsStore>((set) => ({
