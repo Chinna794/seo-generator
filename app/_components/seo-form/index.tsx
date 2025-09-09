@@ -11,18 +11,18 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormLabelWithCounter from "./form-label-with-counter";
 
-const seoFormSchema = z.object({
-  title: z.string().min(1, "Title is required").max(60, "Title must be less than 60 characters"),
-  description: z.string().max(160, "Description must be less than 160 characters").optional(),
-  imageFile: z.any().optional(),
-  url: z.url().optional(),
-});
 
 export default function SeoForm() {
   const { title, setTitle, description, setDescription, imageFile, url, setUrl = () => {} } = useSeoFormStore();
 
   const { titleMaxLength, descriptionMaxLength } = useSettingsStore();
 
+  const seoFormSchema = z.object({
+    title: z.string().min(1, "Title is required").max(titleMaxLength, `Title must be less than ${titleMaxLength} characters`),
+    description: z.string().max(descriptionMaxLength, `Description must be less than ${descriptionMaxLength} characters`).optional(),
+    imageFile: z.any().optional(),
+    url: z.url().optional(),
+  });
   const seoForm = useForm({
     resolver: zodResolver(seoFormSchema),
     defaultValues: {
