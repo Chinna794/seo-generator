@@ -9,6 +9,8 @@ import { useSettingsStore } from "@/store/use-settings-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import GenerateMetadataButton from "../generate-tags/generate-metadata-button";
+import GenerateTagsModal from "../generate-tags/generate-tags-modal";
 import FormLabelWithCounter from "./form-label-with-counter";
 
 export default function SeoForm() {
@@ -151,6 +153,10 @@ export default function SeoForm() {
               </FormItem>
             )}
           />
+
+          <GenerateTagsModal>
+            <GenerateMetadataButton className="w-full items-center justify-center text-center" size="lg" />
+          </GenerateTagsModal>
         </form>
       </Form>
     </div>
