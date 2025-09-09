@@ -14,7 +14,7 @@ export default function GooglePreview() {
         Google
       </Label>
       <div className="">
-        <Link href={url!} className="font-semibold text-[#99c3ff] transition hover:brightness-125">
+        <Link href={url || "#"} className="font-semibold text-[#99c3ff] transition hover:brightness-125">
           {title}
         </Link>
         <span className="flex items-center text-sm text-[#00b339] transition hover:underline">
