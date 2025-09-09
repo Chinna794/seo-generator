@@ -33,7 +33,7 @@ export default function SeoForm() {
   });
 
   const onSubmit = (data: z.infer<typeof seoFormSchema>) => {
-    console.log(data);
+    // handle form submission here
   };
 
   return (
