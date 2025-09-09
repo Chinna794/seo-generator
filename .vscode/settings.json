@@ -1,0 +1,20 @@
+{
+  "cSpell.words": [
+    "heroui",
+    "Hoverable",
+    "hreflangs",
+    "iconify",
+    "nums",
+    "Pinterest",
+    "Pressable",
+    "Roboto",
+    "Serp",
+    "soundwave",
+    "Stylesheet",
+    "Xformerly"
+  ],
+  "biome.enabled": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  }
+}
