@@ -5,7 +5,7 @@ export type SeoFormState = {
   title: string;
   setTitle: (title: string) => void;
   description?: string;
-  setDescription?: (description: string) => void;
+  setDescription: (description: string) => void;
   imageFile: FileWithPreview | undefined;
   setImageFile: (image: FileWithPreview) => void;
   url?: string;
