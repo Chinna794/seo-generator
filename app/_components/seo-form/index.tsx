@@ -33,7 +33,15 @@ export default function SeoForm() {
   });
 
   const onSubmit = (data: z.infer<typeof seoFormSchema>) => {
-    // handle form submission here
+    setTitle(data.title);
+    setDescription(data.description ?? "");
+    // If you have a setter for imageFile, update it as well
+    if (typeof useSeoFormStore.setImageFile === "function") {
+      useSeoFormStore.setImageFile(data.imageFile);
+    }
+    if (typeof setUrl === "function" && data.url) {
+      setUrl(data.url);
+    }
   };
 
   return (
