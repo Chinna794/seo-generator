@@ -37,7 +37,6 @@ export default function SettingsForm() {
   });
 
   const handleSubmit = (data: z.infer<typeof settingsFormSchema>) => {
-    console.log(data);
     const { titleMaxLength, descriptionMaxLength, isFileImage } = data;
 
     const parseNumber = (val: unknown): number | null => {
