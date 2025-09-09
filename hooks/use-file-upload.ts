@@ -21,7 +21,7 @@ export type FileWithPreview = {
 };
 
 export type FileUploadOptions = {
-  maxFiles?: number; // Only used when multiple is true, defaults to Infinity
+  maxFiles?: number; // Only used when multiple is true. Default is set in useFileUpload.
   maxSize?: number; // in bytes
   accept?: string;
   multiple?: boolean; // Defaults to false
