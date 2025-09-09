@@ -22,10 +22,10 @@ export default function GenerateTags() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>Generate Metadata</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your account and remove your data from our
-            servers.
+            Click "Confirm" to automatically generate metadata tags for your content. This will help improve SEO and social sharing.
+            You can review and edit the generated tags before saving.
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
