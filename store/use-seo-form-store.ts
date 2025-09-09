@@ -10,6 +10,7 @@ export type SeoFormState = {
   setImageFile: (image: FileWithPreview) => void;
   url?: string;
   setUrl?: (url: string) => void;
+  getIsFormComplete: () => boolean;
 };
 
 export const useSeoFormStore = create<SeoFormState>((set) => ({
