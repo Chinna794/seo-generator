@@ -4,6 +4,7 @@ import { CheckIcon, ClipboardIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
@@ -41,6 +42,7 @@ export function CopyButton({
           onClick={() => {
             copyToClipboardWithMeta(value);
             setHasCopied(true);
+            toast.success("Copied to clipboard", { duration: 2000 });
           }}
           {...props}
         >

@@ -1,4 +1,5 @@
 import { CopyButton } from "@/components/copy-button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,12 +10,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 import { getMetaTagsCode } from "@/lib/get-meta-tags";
 import { useMetaTagsStore } from "@/store/use-meta-tags-store";
 import { useSeoFormStore } from "@/store/use-seo-form-store";
-import { OctagonAlertIcon, TagIcon, XIcon } from "lucide-react";
+import { AlertOctagonIcon, TagIcon, XIcon } from "lucide-react";
+import Link from "next/link";
 import React from "react";
-import { ComponentSource } from "../metatags-source";
+import { ComponentSource } from "../meta-tags-source";
 
 export default function GenerateTagsModal({ children }: { children: React.ReactNode }) {
   const { code } = useMetaTagsStore();
@@ -37,13 +40,13 @@ export default function GenerateTagsModal({ children }: { children: React.ReactN
             </DialogClose>
           </DialogTitle>
           <DialogDescription asChild>
-            <div className="p-6">
-              <span className="text-muted-foreground group mb-4 flex max-w-xl items-center gap-3 rounded-md bg-neutral-900 p-3 text-sm">
-                <OctagonAlertIcon className="text-orange-400" />
-                <span className="text-orange-300 transition-colors group-hover:text-orange-400">
-                  Please review the generated metadata, and paths before using it in production.
-                </span>
-              </span>
+            <div className="p-4">
+              <Alert variant={"warning"} className="mb-2">
+                <AlertOctagonIcon />
+                <AlertDescription>
+                  <p>Please review the generated metadata, and paths before using it in production.</p>
+                </AlertDescription>
+              </Alert>
               <ComponentSource
                 src={getMetaTagsCode({
                   title,
@@ -53,9 +56,18 @@ export default function GenerateTagsModal({ children }: { children: React.ReactN
                 })}
               />
               <div className="flex items-center justify-between p-2 text-sm">
-                <p>
-                  Insert this code into your <code>&lt;head /&gt;</code> element.
-                </p>
+                <Label>
+                  Insert this code into your{" "}
+                  <Link
+                    href={"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/head"}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="rounded-sm bg-neutral-900 p-1 font-mono shadow-md transition-all hover:bg-neutral-800 hover:shadow-lg active:scale-95"
+                  >
+                    <code>&lt;head /&gt;</code>{" "}
+                  </Link>
+                  element.
+                </Label>
                 <CopyButton value={code} />
               </div>
             </div>
