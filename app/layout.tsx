@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import styles from "./container.module.css";
 import "./globals.css";
 
@@ -29,7 +30,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" sizes="any" />
       </head>
-      <body className={cn(geistSans.variable, geistMono.variable, "antialiased", styles.container)}>{children}</body>
+      <body className={cn(geistSans.variable, geistMono.variable, "antialiased", styles.container)}>
+        {children}
+        <Toaster position="top-center" />
+      </body>
     </html>
   );
 }
