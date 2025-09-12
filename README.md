@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SEO Generator
 
-## Getting Started
+SEO Generator is a **Next.js-based application** designed to create and preview SEO metadata with real-time platform previews and copy-ready HTML meta tag generation.
 
-First, run the development server:
+The tool enables developers and content creators to:
+
+- Input and validate SEO metadata (title, description, URL, images)
+- Preview content across major platforms (Google, Twitter/X, Facebook, Slack, LinkedIn, Pinterest)
+- Generate production-ready HTML meta tags including **Open Graph** and **Twitter Card** markup
+- Upload and manage SEO images with drag-and-drop support
+- Maintain real-time synchronization between form inputs and platform previews
+
+## 📌 Purpose & Scope
+
+SEO Generator provides an end-to-end workflow for SEO optimization:
+
+1. **Metadata Input** – Define titles, descriptions, URLs, and images.
+2. **Live Previews** – Instantly see how content appears on multiple platforms.
+3. **Meta Tag Generation** – Produce HTML tags ready for production use.
+4. **Image Management** – Upload, validate, and preview SEO images.
+
+## 🏛 High-Level System Architecture
+
+The application follows a **hub-and-spoke architecture**:
+
+- `SeoForm` serves as the central data input system.
+- Shared state management (via Zustand) propagates input data to:
+  - Preview components (Google, Twitter, etc.)
+  - Meta tag generation module.
+
+## 🔄 Data Flow & State Management
+
+SEO Generator uses **Zustand** for centralized state management.
+
+**Flow:**
+
+![Structure](/public/seo-preview-structure.png)
+
+1. User inputs SEO data in `SeoForm`.
+2. State updates propagate reactively to preview components.
+3. Meta tag generation consumes the same state to produce HTML tags.
+
+## 🔗 Core Component Relationships
+
+- **SeoForm** → Collects and validates user input.
+- **Preview Components** → Render platform-specific previews in real time.
+- **GenerateTagsModal** → Generates copyable HTML meta tags.
+- **CopyButton** → Provides one-click copy functionality.
+
+## ⚙️ Technology Stack
+
+| Category              | Technology             | Purpose                          | Key Files                            |
+| --------------------- | ---------------------- | -------------------------------- | ------------------------------------ |
+| **Framework**         | Next.js 15.5.2         | React framework with SSR support | `app/page.tsx`, `app/layout.tsx`     |
+| **State Management**  | Zustand 5.0.8          | Lightweight global store         | `store/use-seo-form-store.ts`        |
+| **Form Handling**     | React Hook Form 7.62.0 | Form state & validation          | `app/_components/seo-form/index.tsx` |
+| **Schema Validation** | Zod 4.1.5              | Type-safe schema validation      | `app/_components/seo-form/index.tsx` |
+| **UI Components**     | Radix UI               | Accessible UI primitives         | `components/ui/dialog.tsx`           |
+| **Styling**           | Tailwind CSS 4         | Utility-first CSS framework      | `app/globals.css`                    |
+| **File Upload**       | Custom Hook            | Drag-and-drop image handling     | `hooks/use-file-upload.ts`           |
+| **Icons**             | Lucide React           | Icon library                     | Preview components                   |
+| **Code Highlighting** | Shiki                  | Syntax highlighting              | `lib/highlight-code.ts`              |
+
+## 📂 File Structure & Organization
+
+The project follows the **Next.js 13+ app directory structure**, ensuring modular and maintainable organization:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+app/
+├── \_components/
+│   ├── seo-form/
+│   ├── preview/
+│   ├── generate-tags/
+│   └── ...
+├── layout.tsx
+├── page.tsx
+└── globals.css
+store/
+├── use-seo-form-store.ts
+├── use-meta-tags-store.ts
+└── use-settings-store.ts
+hooks/
+└── use-file-upload.ts
+components/
+├── ui/
+└── copy-button.tsx
+lib/
+└── highlight-code.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗃 Key State Management Patterns
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+SEO Generator uses **three primary Zustand stores**:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Store              | Purpose                               | Key State                                  | Consumers                            |
+| ------------------ | ------------------------------------- | ------------------------------------------ | ------------------------------------ |
+| `useSeoFormStore`  | Core SEO data management              | `title`, `description`, `url`, `imageFile` | SeoForm, Previews, GenerateTagsModal |
+| `useMetaTagsStore` | Stores generated HTML tag code        | `code`                                     | GenerateTagsModal, CopyButton        |
+| `useSettingsStore` | Validation and configuration settings | `titleMaxLength`, `descriptionMaxLength`   | SeoForm                              |
 
-## Learn More
+**State Flow Pattern:**
 
-To learn more about Next.js, take a look at the following resources:
+1. Input updates → `useSeoFormStore`
+2. Previews render → Consume `useSeoFormStore`
+3. Meta tags generated → Written to `useMetaTagsStore`
+4. Validation rules → Provided by `useSettingsStore`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🖼 Preview System
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The preview system provides **real-time representations** of how SEO content appears across platforms.
 
-## Deploy on Vercel
+**Pattern:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Import platform-specific icons
+- Consume SEO data from `useSeoFormStore`
+- Render platform-specific HTML structure
+- Handle fallbacks (e.g., `/placeholder.jpg`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Preview Components:
+
+- `google-preview.tsx`
+- `twitter-preview.tsx`
+- `facebook-preview.tsx`
+- `slack-preview.tsx`
+- `linkedin-preview.tsx`
+- `pinterest-preview.tsx`
+
+## 📖 Sources
+
+- `app/page.tsx`
+- `app/_components/seo-form/index.tsx`
+- `app/_components/preview/*`
+- `app/_components/generate-tags/*`
+- `store/use-seo-form-store.ts`
+- `store/use-meta-tags-store.ts`
+- `hooks/use-file-upload.ts`
+- `lib/highlight-code.ts`
+
+## 📌 Conclusion
+
+This document provides a **technical overview of the SEO Generator architecture, data flow, and component relationships**.
+
+For implementation details, refer to:
+
+- [SEO Form Input System]
+- [Platform Preview System]
+- [Meta Tag Generation]
+- [Architecture & Implementation]
