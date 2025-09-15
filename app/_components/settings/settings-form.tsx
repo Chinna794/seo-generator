@@ -168,9 +168,11 @@ export default function SettingsForm() {
             <DialogClose asChild type="button">
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" className="cursor-pointer bg-blue-600 text-white hover:bg-blue-500/90">
-              Save Settings
-            </Button>
+            <DialogClose asChild>
+              <Button type="submit" className="cursor-pointer bg-blue-600 text-white hover:bg-blue-500/90">
+                Save Settings
+              </Button>
+            </DialogClose>
           </div>
         </form>
       </Form>

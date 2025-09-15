@@ -16,7 +16,7 @@ import FormLabelWithCounter from "./form-label-with-counter";
 export default function SeoForm() {
   const { title, setTitle, description, setDescription, imageFile, url, setUrl = () => {} } = useSeoFormStore();
 
-  const { titleMaxLength, descriptionMaxLength } = useSettingsStore();
+  const { titleMaxLength, descriptionMaxLength, isFileImage } = useSettingsStore();
 
   const seoFormSchema = z.object({
     title: z
@@ -115,7 +115,11 @@ export default function SeoForm() {
               <FormItem>
                 <FormLabel>Image</FormLabel>
                 <FormControl>
-                  <FileUploader {...field} />
+                  {isFileImage ? (
+                    <FileUploader {...field} />
+                  ) : (
+                    <Input placeholder="Enter image URL or local Path" {...field} />
+                  )}
                 </FormControl>
                 <FormMessage />
               </FormItem>
