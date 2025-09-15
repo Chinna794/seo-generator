@@ -1,7 +1,7 @@
 "use client";
 
 import { RiStarFill } from "@remixicon/react";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -11,16 +11,21 @@ export default function Rating() {
   const [hoverRating, setHoverRating] = useState("");
   const [currentRating, setCurrentRating] = useState("");
   const [isRated, setIsRated] = useState(false);
-  const [cachedRating, setCachedRating] = useState(localStorage?.getItem("rating") || "");
+  const [cachedRating, setCachedRating] = useState("");
 
   const onRateChange = (value: string) => {
     setCurrentRating(value);
     setIsRated(true);
     setTimeout(() => {
-      localStorage.setItem("rating", value);
+      localStorage?.setItem("rating", value);
       setCachedRating(value);
     }, 900);
   };
+
+  useEffect(() => {
+    const storageRating = localStorage?.getItem("rating");
+    if (storageRating) setCachedRating(storageRating);
+  }, []);
 
   if (cachedRating) return null;
 
