@@ -31,7 +31,7 @@ export default function GenerateTagsModal({ children }: { children: React.ReactN
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="flex flex-col gap-0 p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg md:max-w-3xl lg:max-w-5xl [&>button:last-child]:hidden">
+      <DialogContent className="flex flex-col gap-0 overflow-y-auto p-0 sm:max-h-[min(640px,80vh)] sm:max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-h-none [&>button:last-child]:hidden">
         <DialogHeader className="contents space-y-0 text-left">
           <DialogTitle className="flex items-center justify-between px-6 pt-6">
             <div className="flex items-center gap-2">
@@ -55,11 +55,16 @@ export default function GenerateTagsModal({ children }: { children: React.ReactN
 
               {/* Tabs wrapper */}
               <Tabs defaultValue="html">
-                <TabsList>
-                  <TabsTrigger value="html">HTML</TabsTrigger>
-                  <TabsTrigger value="next">Next.js</TabsTrigger>
-                  <TabsTrigger value="astro">Astro</TabsTrigger>
-                </TabsList>
+                <div className="flex items-center justify-between">
+                  <TabsList>
+                    <TabsTrigger value="html">HTML</TabsTrigger>
+                    <TabsTrigger value="next">Next.js</TabsTrigger>
+                    <TabsTrigger value="astro">Astro</TabsTrigger>
+                  </TabsList>
+                  <div className="flex justify-end p-2 text-sm">
+                    <CopyButton value={astroCode} />
+                  </div>
+                </div>
 
                 <TabsContent value="html">
                   <ComponentSource src={htmlCode} />
